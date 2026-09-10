@@ -16,6 +16,8 @@ $theme = Join-Path $root 'web\app\themes\starter-theme'
 $envFile = Join-Path $root '.env'
 $php = 'C:\php83\php.exe'
 $composer = 'C:\ProgramData\ComposerSetup\bin\composer.phar'
+$node = 'C:\Program Files\nodejs\node.exe'
+$npm = 'C:\Program Files\nodejs\npm.cmd'
 $wp = Join-Path $root 'scripts\wp.ps1'
 $seed = Join-Path $root 'scripts\seed-demo-content.ps1'
 
@@ -41,11 +43,13 @@ function New-Secret {
 
 Assert-Path $php 'PHP 8.3 not found at C:\php83\php.exe'
 Assert-Path $composer 'Composer PHAR not found at C:\ProgramData\ComposerSetup\bin\composer.phar'
+Assert-Path $node 'Node not found at C:\Program Files\nodejs\node.exe'
+Assert-Path $npm 'npm not found at C:\Program Files\nodejs\npm.cmd'
 Assert-Path $wp 'WP-CLI wrapper not found at scripts\wp.ps1'
 Assert-Path $seed 'Demo seed script not found at scripts\seed-demo-content.ps1'
 
-& node --version | Out-Null
-& npm --version | Out-Null
+& $node --version | Out-Null
+& $npm --version | Out-Null
 & $wp --info | Out-Null
 
 if ((-not (Test-Path -LiteralPath $envFile)) -or $ForceEnv) {
@@ -82,8 +86,8 @@ if (-not $SkipInstall) {
     & $php $composer install
     Push-Location $theme
     try {
-        & npm install
-        & npm run build
+        & $npm install
+        & $npm run build
     } finally {
         Pop-Location
     }

@@ -23,6 +23,9 @@
 
 ## Harness
 
+- Run `.\scripts\doctor.ps1` before implementation work in this repo.
+- If doctor reports `ERROR`, fix it or ask before changing code.
+- If doctor reports only `WARN`, proceed only if the warning does not affect the task.
 - Follow `specs/CONSTITUTION.md`.
 - Work from proposal, design, and tasks.
 - Keep changes small and independently verifiable.

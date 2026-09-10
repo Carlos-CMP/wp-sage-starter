@@ -17,11 +17,25 @@ Keep `.env` out of version control.
 
 ## Install
 
+Check local prerequisites first:
+
 ```powershell
-.\new-project.ps1 -DbHost 127.0.0.1:10023
+.\scripts\doctor.ps1
 ```
 
-Use the MySQL host/port shown by LocalWP for the project.
+If the repo is not already serving LocalWP's `app/public`, link it:
+
+```powershell
+.\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\starter-sage-wp"
+```
+
+Then bootstrap with the DB host and frontend URL shown by LocalWP:
+
+```powershell
+.\new-project.ps1 -ProjectName "My Project" -Domain "my-project.local" -DbHost 127.0.0.1:10023
+```
+
+Use `-Domain "localhost:<port>"` when LocalWP is in localhost Routing Mode.
 
 ## WP-CLI
 
