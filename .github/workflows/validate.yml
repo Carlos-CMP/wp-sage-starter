@@ -1,0 +1,53 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/app/themes/starter-theme/package-lock.json
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Validate Composer config
+        run: composer validate --strict
+
+      - name: Lint PHP
+        run: composer lint
+
+      - name: Install theme dependencies
+        working-directory: web/app/themes/starter-theme
+        run: npm ci
+
+      - name: Lint frontend
+        working-directory: web/app/themes/starter-theme
+        run: npm run lint
+
+      - name: Check formatting
+        working-directory: web/app/themes/starter-theme
+        run: npm run format
+
+      - name: Build theme
+        working-directory: web/app/themes/starter-theme
+        run: npm run build

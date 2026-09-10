@@ -1,0 +1,8 @@
+@import 'tailwindcss' theme(static);
+@import '../design-system/tokens.css';
+@import '../design-system/project-tokens.css';
+@import '../design-system/typography.css';
+@import '../design-system/utilities.css';
+@source "../../app/**/*.php";
+@source "../**/*.blade.php";
+@source "../**/*.js";

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "starter/accordion",
+  "title": "Accordion / FAQ",
+  "category": "starter",
+  "icon": "editor-help",
+  "description": "FAQ section using native child blocks.",
+  "attributes": {
+    "title": { "type": "string", "default": "Frequently asked questions" },
+    "variant": { "type": "string", "default": "default" }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  },
+  "render": "file:./render.php"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "starter/text-image",
+  "title": "Text + Image",
+  "category": "starter",
+  "icon": "align-pull-left",
+  "description": "Two-column content section with optional image and CTA.",
+  "attributes": {
+    "title": { "type": "string", "default": "Text and image" },
+    "text": { "type": "string", "default": "" },
+    "imageId": { "type": "number" },
+    "imageUrl": { "type": "string", "default": "" },
+    "imageAlt": { "type": "string", "default": "" },
+    "imagePosition": { "type": "string", "default": "right" },
+    "ctaLabel": { "type": "string", "default": "" },
+    "ctaUrl": { "type": "string", "default": "" },
+    "variant": { "type": "string", "default": "default" }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  },
+  "render": "file:./render.php"
+}

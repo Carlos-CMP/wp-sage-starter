@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "starter/accordion-item",
+  "title": "FAQ Item",
+  "category": "starter",
+  "icon": "editor-help",
+  "description": "Single FAQ item for the Accordion / FAQ block.",
+  "parent": ["starter/accordion"],
+  "attributes": {
+    "question": { "type": "string", "default": "Question" }
+  },
+  "supports": {
+    "reusable": false,
+    "html": false
+  },
+  "render": "file:./render.php"
+}

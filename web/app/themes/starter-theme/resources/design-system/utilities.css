@@ -1,0 +1,31 @@
+.starter-container {
+  margin-inline: auto;
+  max-width: var(--container-width);
+  padding-inline: var(--space-page-x);
+}
+
+.starter-button {
+  align-items: center;
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-soft);
+  color: var(--color-accent-contrast);
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.625rem 1rem;
+  text-decoration: none;
+}
+
+.starter-input {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  color: var(--color-text);
+  min-height: 2.75rem;
+  padding: 0.625rem 0.75rem;
+  width: 100%;
+}

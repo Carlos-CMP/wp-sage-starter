@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "starter/cta",
+  "title": "CTA",
+  "category": "starter",
+  "icon": "megaphone",
+  "description": "Call-to-action section with primary and secondary links.",
+  "attributes": {
+    "title": { "type": "string", "default": "Call to action" },
+    "text": { "type": "string", "default": "" },
+    "primaryCtaLabel": { "type": "string", "default": "" },
+    "primaryCtaUrl": { "type": "string", "default": "" },
+    "secondaryCtaLabel": { "type": "string", "default": "" },
+    "secondaryCtaUrl": { "type": "string", "default": "" },
+    "variant": { "type": "string", "default": "default" }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  },
+  "render": "file:./render.php"
+}
