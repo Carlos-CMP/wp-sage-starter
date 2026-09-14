@@ -12,8 +12,9 @@
 - Moved the coding-convention rules (architecture, blocks, security) out of `docs/planning/AGENTS.md` into a root `AGENTS.md`, so they survive `scripts/new-instance.ps1` and reach every generated project instead of being deleted with the rest of the starter's internal planning docs.
 - Folded `docs/BASELINE.md` into `AGENTS.md` and removed the duplicated block rules from `docs/BLOCKS.md` and the duplicated hooks list from `docs/PROJECT-CONFIG.md`.
 - Folded `docs/SETUP.md` into `docs/CLONING.md` (they described the same onboarding flow from different angles) and removed it.
-- Removed `docs/ARCHITECTURE.md`: its "Boundaries" rules moved into `AGENTS.md`, its "Design System" section was a duplicate of `docs/PROJECT-CONFIG.md`, its "Blocks" section duplicated `docs/BLOCKS.md`, and its "Baseline Hooks" list moved to `docs/PROJECT-CONFIG.md` (now the single source). The runtime diagram it linked is now linked directly from `README.md`.
+- Removed `docs/ARCHITECTURE.md`: its "Boundaries" rules moved into `AGENTS.md`, its "Design System" section was a duplicate of `docs/PROJECT-CONFIG.md`, and its "Blocks" section duplicated `docs/BLOCKS.md`. The runtime diagram it linked is now linked directly from `README.md`.
 - Removed `docs/CLONING.md`: after the SETUP.md merge it mostly restated the README's own Setup section with more words. Folded its remaining unique content (`STARTER_*` PATH overrides, required `.env` keys, both LocalWP routing-mode examples, the `wp.ps1`/`seed-demo-content.ps1` reference commands) directly into `README.md`, which is now the single, complete setup doc — no separate file for "the full workflow".
+- Removed `docs/PROJECT-CONFIG.md`: its `.env` and Validation sections duplicated README, and its Content Plugin section duplicated `AGENTS.md` (including an exact repeat of `site_content_setting()` that landed in both files during the `ARCHITECTURE.md` cleanup). Folded its genuinely unique content — design token paths, the feature-flags path, menu locations, and the baseline hooks list — into `AGENTS.md`, now the single source for all of it.
 
 ## 1.0.0 - 2026-09-10
 

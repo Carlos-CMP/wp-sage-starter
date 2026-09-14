@@ -58,6 +58,5 @@ To run WP-CLI directly: `.\scripts\wp.ps1 --info` (commands that load WordPress 
 Bedrock, Sage, and `site-content` each own a boundary of the stack — see `AGENTS.md` for the rules.
 
 See `docs/BLOCKS.md` to add blocks.
-See `docs/PROJECT-CONFIG.md` for environment, tokens, feature flags, menus, and hooks.
-See `AGENTS.md` for the coding conventions AI agents and contributors must follow, including cross-cutting accessibility, performance, SEO, analytics, forms, logging, and security rules.
+See `AGENTS.md` for the coding conventions AI agents and contributors must follow: architecture, design tokens, feature flags, menus, hooks, and cross-cutting accessibility, performance, SEO, analytics, forms, logging, and security rules.
 See `docs/runtime-architecture.html` for an interactive runtime diagram.

@@ -6,8 +6,11 @@
 - Theme code is presentation only and must not contain project content models.
 - Content/domain configuration belongs in `site-content`, which must not depend on theme markup.
 - Theme code reads global settings through `site_content_setting($key, $default)`.
+- Feature flags live in `web/app/plugins/site-content/config/features.php`.
 - Secrets and environment values belong in `.env`.
 - Non-sensitive behavior belongs in versioned project config.
+- Default design tokens live in `web/app/themes/starter-theme/resources/design-system/tokens.css`; project branding overrides go in `.../design-system/project-tokens.css`. Change tokens before changing component markup.
+- Theme menu locations: `primary_navigation`, `footer_navigation`.
 
 ## Blocks
 
@@ -40,7 +43,13 @@
 
 ## Analytics And Marketing
 
-Add analytics or marketing snippets through the baseline hooks (see `docs/PROJECT-CONFIG.md`) from a project plugin or child project customization, instead of editing shared templates. Consent and provider choice belong to each generated project.
+Add analytics or marketing snippets through these hooks, from a project plugin or child project customization, instead of editing shared templates:
+
+- `starter_head`
+- `starter_body_open`
+- `starter_before_footer`
+
+Consent and provider choice belong to each generated project.
 
 ## Forms
 
