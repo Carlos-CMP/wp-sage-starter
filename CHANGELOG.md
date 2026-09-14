@@ -22,6 +22,7 @@
 - Trimmed README's Architecture section to just the diagram link; dropped its prose restating Bedrock/Sage/site-content boundaries and its pointer to `AGENTS.md` — `AGENTS.md` is still a root file every AI coding tool reads by convention, just no longer cross-linked from the README.
 - Reformatted README's Setup as a bare command list: dropped the per-step prose (what each script does internally, the `.env` key list) in favor of just the commands to run, pointing to `.env.example` for the keys instead of repeating them.
 - Dropped Windows and LocalWP from README's Requirements list and its explanatory paragraph — taken as a given rather than called out. The rest of the doc (PowerShell scripts, `link-localwp.ps1`) still assumes both.
+- Shortened the Node.js requirement in README to just "Node.js": the specific version range is already enforced by `engine-strict` at `npm install` time, so restating it was redundant.
 
 ## 1.0.0 - 2026-09-10
 

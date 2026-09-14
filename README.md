@@ -8,7 +8,7 @@ This starter is a template of origin. Generated projects evolve independently.
 
 - PHP >= 8.3
 - Composer >= 2.x
-- Node.js matching `web/app/themes/starter-theme/package.json` engines (currently `^20.19.0` or `>=22.12.0`)
+- Node.js
 - WP-CLI available on PATH
 - Git
 
