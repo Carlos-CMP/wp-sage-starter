@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Bootstrap scripts (`doctor.ps1`, `new-project.ps1`, `validate.ps1`, `wp.ps1`) now resolve PHP, Composer, Node, npm, WP-CLI, and Git from PATH instead of hardcoded machine-specific paths, with optional `STARTER_*` environment variable overrides.
+- Added `scripts/new-instance.ps1` to detach a fresh clone from the starter: drops `docs/planning` and resets git history to a single commit with no starter remote.
 - Fixed `doctor.ps1` crashing instead of reporting a clean error when an invoked tool (e.g. WP-CLI) fails.
 
 ## 1.0.0 - 2026-09-10

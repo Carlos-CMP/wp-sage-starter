@@ -21,11 +21,21 @@ Check the machine before bootstrapping:
 .\scripts\doctor.ps1
 ```
 
+## Detach From The Starter
+
+Right after cloning, before running anything else, turn the clone into an independent project:
+
+```powershell
+.\scripts\new-instance.ps1
+```
+
+This removes `docs/planning` (the starter's own internal build docs, not relevant to a client project) and resets git history to a single commit with no starter remote attached, so the new project owns its history from commit 1. It asks for confirmation and requires a clean working tree; pass `-Force` to skip the prompt, or `-KeepPlanningDocs` to keep the planning docs.
+
 ## LocalWP Flow
 
 1. Create a new site in LocalWP.
 2. Use the project name as the LocalWP site domain when possible.
-3. Clone this repository outside or inside `~/Local Sites`.
+3. Clone this repository outside or inside `~/Local Sites`, then run `.\scripts\new-instance.ps1` as described above.
 4. Link LocalWP's `app/public` directory to the starter `web` directory:
 
 ```powershell

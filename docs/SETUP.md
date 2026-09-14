@@ -2,6 +2,8 @@
 
 LocalWP is the recommended local runtime. The starter does not control LocalWP directly.
 
+Right after cloning, run `.\scripts\new-instance.ps1` once to detach the clone from the starter (drops internal planning docs, resets git history, removes the starter remote) before doing anything else. See `docs/CLONING.md`.
+
 ## Environment
 
 Copy `.env.example` to `.env` and fill:

@@ -14,9 +14,10 @@ This starter is a template of origin. Generated projects evolve independently.
 
 ## Setup
 
-Create a LocalWP site, clone the repository, link LocalWP's `app/public` to this starter's `web` directory, then bootstrap.
+Create a LocalWP site, clone the repository, detach it from the starter, link LocalWP's `app/public` to this starter's `web` directory, then bootstrap.
 
 ```powershell
+.\scripts\new-instance.ps1
 .\scripts\doctor.ps1
 .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\starter-sage-wp"
 .\new-project.ps1 -ProjectName "My Project" -Domain "my-project.local" -DbHost "127.0.0.1:10023"
