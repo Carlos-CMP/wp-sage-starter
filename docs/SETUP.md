@@ -53,7 +53,7 @@ Commands that load WordPress require `.env` with LocalWP database and URL values
 .\scripts\seed-demo-content.ps1
 ```
 
-This creates or updates the `Starter Components` homepage with the v1.0.0 blocks.
+This creates or updates the `Starter Components` homepage with a single Hero block as a smoke test.
 
 ## Validation
 

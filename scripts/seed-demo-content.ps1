@@ -6,25 +6,7 @@ $wp = Join-Path $PSScriptRoot 'wp.ps1'
 $tempFile = Join-Path ([System.IO.Path]::GetTempPath()) 'starter-components-content.html'
 
 $content = @'
-<!-- wp:starter/hero {"eyebrow":"Starter","title":"WordPress Sage Starter","text":"A reusable foundation for marketing websites with Bedrock, Sage, Gutenberg blocks, and replaceable design tokens.","primaryCtaLabel":"View components","primaryCtaUrl":"#components","secondaryCtaLabel":"Read setup","secondaryCtaUrl":"/wp-admin/","alignment":"left","variant":"default"} /-->
-
-<!-- wp:starter/text-image {"title":"Design-system first","text":"Components consume shared tokens so project branding can change without rewriting block markup.","ctaLabel":"Architecture","ctaUrl":"/","imagePosition":"right","variant":"muted"} /-->
-
-<!-- wp:starter/cta {"title":"Ready for project work","text":"Use this page as a smoke test when a new starter instance is created.","primaryCtaLabel":"Open editor","primaryCtaUrl":"/wp-admin/post.php","secondaryCtaLabel":"Visit dashboard","secondaryCtaUrl":"/wp-admin/","variant":"default"} /-->
-
-<!-- wp:starter/accordion {"title":"Starter FAQ","variant":"default"} -->
-<!-- wp:starter/accordion-item {"question":"Does this require ACF Pro?"} -->
-<!-- wp:paragraph -->
-<p>No. Repeated and nested content uses native Gutenberg blocks.</p>
-<!-- /wp:paragraph -->
-<!-- /wp:starter/accordion-item -->
-
-<!-- wp:starter/accordion-item {"question":"Where does domain content belong?"} -->
-<!-- wp:paragraph -->
-<p>Project content configuration belongs in the site-content plugin, not in the theme.</p>
-<!-- /wp:paragraph -->
-<!-- /wp:starter/accordion-item -->
-<!-- /wp:starter/accordion -->
+<!-- wp:starter/hero {"eyebrow":"Starter","title":"WordPress Sage Starter","text":"A reusable foundation for marketing websites with Bedrock, Sage, Gutenberg blocks, and replaceable design tokens.","primaryCtaLabel":"Open editor","primaryCtaUrl":"/wp-admin/post.php","secondaryCtaLabel":"Visit dashboard","secondaryCtaUrl":"/wp-admin/","alignment":"left","variant":"default"} /-->
 '@
 
 [System.IO.File]::WriteAllText($tempFile, $content, [System.Text.UTF8Encoding]::new($false))

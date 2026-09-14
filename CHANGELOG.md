@@ -6,6 +6,7 @@
 - Added `scripts/new-instance.ps1` to detach a fresh clone from the starter: drops `docs/planning` and resets git history to a single commit with no starter remote.
 - Fixed `doctor.ps1` crashing instead of reporting a clean error when an invoked tool (e.g. WP-CLI) fails.
 - `new-project.ps1` now checks `wp core is-installed` before activating the plugin/theme, and checks the exit code of every WP-CLI call, instead of silently reporting "Bootstrap complete" after a failed step.
+- `scripts/seed-demo-content.ps1` now seeds a single Hero block on the `Starter Components` homepage instead of one of each starter block.
 
 ## 1.0.0 - 2026-09-10
 
