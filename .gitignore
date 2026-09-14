@@ -1,5 +1,10 @@
 # Application
 .pastiche/
+
+# Starter's own internal planning docs — never relevant to a generated
+# project, and this repo is public, so they stay local-only.
+docs/planning/
+docs/specs/
 web/app/plugins/*
 !web/app/plugins/.gitkeep
 !web/app/plugins/site-content/
