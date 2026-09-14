@@ -48,7 +48,6 @@
   },
   "config": {
     "optimize-autoloader": true,
-    "platform-check": false,
     "preferred-install": "dist",
     "allow-plugins": {
       "composer/installers": true,

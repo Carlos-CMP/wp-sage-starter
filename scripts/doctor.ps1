@@ -78,38 +78,6 @@ function Invoke-Capture {
     }
 }
 
-function Test-VersionAtLeast {
-    param(
-        [string] $Version,
-        [int] $Major,
-        [int] $Minor
-    )
-
-    if ($Version -notmatch '(\d+)\.(\d+)') {
-        return $false
-    }
-
-    $actualMajor = [int] $Matches[1]
-    $actualMinor = [int] $Matches[2]
-
-    return ($actualMajor -gt $Major) -or (($actualMajor -eq $Major) -and ($actualMinor -ge $Minor))
-}
-
-function Test-NodeVersion {
-    param(
-        [string] $Version
-    )
-
-    if ($Version -notmatch 'v?(\d+)\.(\d+)\.(\d+)') {
-        return $false
-    }
-
-    $major = [int] $Matches[1]
-    $minor = [int] $Matches[2]
-
-    return (($major -eq 20) -and ($minor -ge 19)) -or (($major -eq 22) -and ($minor -ge 12)) -or ($major -gt 22)
-}
-
 function Read-EnvKeys {
     param(
         [string] $Path
@@ -137,10 +105,10 @@ foreach ($tool in @('PHP', 'Composer', 'WPCLI', 'WPWrapper', 'Git', 'Node', 'Npm
 
 if ($paths.PHP) {
     $phpVersion = Invoke-Capture { & $paths.PHP -r 'echo PHP_VERSION;' }
-    if (($phpVersion.ExitCode -eq 0) -and (Test-VersionAtLeast $phpVersion.Output 8 3)) {
-        Add-Result 'OK' 'PHP version' "PHP $($phpVersion.Output)"
+    if ($phpVersion.ExitCode -eq 0) {
+        Add-Result 'OK' 'PHP version' "PHP $($phpVersion.Output) (composer install enforces the '>=8.3' requirement in composer.json)"
     } else {
-        Add-Result 'ERROR' 'PHP version' "PHP 8.3 or newer required" $phpVersion.Output
+        Add-Result 'ERROR' 'PHP version' 'Failed to read PHP version' $phpVersion.Output
     }
 }
 
@@ -169,10 +137,11 @@ if ($paths.Git) {
 
 if ($paths.Node) {
     $nodeVersion = Invoke-Capture { & $paths.Node --version }
-    if (($nodeVersion.ExitCode -eq 0) -and (Test-NodeVersion $nodeVersion.Output)) {
-        Add-Result 'OK' 'Node version' "$($nodeVersion.Output) satisfies $((Get-Content -Raw (Join-Path $theme 'package.json') | ConvertFrom-Json).engines.node)"
+    if ($nodeVersion.ExitCode -eq 0) {
+        $requiredNode = (Get-Content -Raw (Join-Path $theme 'package.json') | ConvertFrom-Json).engines.node
+        Add-Result 'OK' 'Node version' "$($nodeVersion.Output) (npm install enforces '$requiredNode' via engine-strict)"
     } else {
-        Add-Result 'ERROR' 'Node version' 'Node must satisfy ^20.19.0 || >=22.12.0' $nodeVersion.Output
+        Add-Result 'ERROR' 'Node version' 'Failed to read Node version' $nodeVersion.Output
     }
 }
 
