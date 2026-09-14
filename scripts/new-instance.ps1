@@ -14,20 +14,26 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $root = Split-Path -Parent $PSScriptRoot
-$planningDocs = Join-Path $root 'docs\planning'
+$targets = @(
+    (Join-Path $root 'docs\planning'),
+    (Join-Path $root 'docs\specs')
+) | Where-Object { Test-Path -LiteralPath $_ }
 
-if (-not (Test-Path -LiteralPath $planningDocs)) {
-    'docs/planning not found; nothing to remove.'
+if (-not $targets) {
+    'docs/planning and docs/specs not found; nothing to remove.'
     exit 0
 }
 
 if (-not $Force) {
-    $confirmation = Read-Host "Remove docs/planning (the starter's own internal build docs)? [y/N]"
+    $list = ($targets | ForEach-Object { Resolve-Path -LiteralPath $_ -Relative }) -join ', '
+    $confirmation = Read-Host "Remove $list (the starter's own internal build docs)? [y/N]"
     if ($confirmation -notmatch '^[Yy]') {
         'Aborted.'
         exit 1
     }
 }
 
-Remove-Item -LiteralPath $planningDocs -Recurse -Force
-"Removed $planningDocs"
+foreach ($target in $targets) {
+    Remove-Item -LiteralPath $target -Recurse -Force
+    "Removed $target"
+}

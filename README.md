@@ -21,13 +21,13 @@ The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a 
 ## Setup
 
 1. Create a new repository from this starter using GitHub's **Use this template** button (not `git clone` — that keeps the starter's own history and `origin`), then clone your new repository.
-2. Remove the starter's own internal planning docs (not relevant to your project):
+2. Remove the starter's own internal planning docs (`docs/planning`, `docs/specs`; not relevant to your project):
 
    ```powershell
    .\scripts\new-instance.ps1
    ```
 
-   Asks for confirmation; pass `-Force` to skip it. A no-op if `docs/planning` is already gone.
+   Asks for confirmation; pass `-Force` to skip it. A no-op if both are already gone.
 3. Check your machine against the requirements above:
 
    ```powershell
