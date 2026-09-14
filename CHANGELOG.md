@@ -10,8 +10,9 @@
 - `scripts/seed-demo-content.ps1` now seeds a single Hero block on the `Starter Components` homepage instead of one of each starter block.
 - PHP and Node version requirements are now enforced by Composer and npm themselves instead of custom checks in `doctor.ps1`: removed `"platform-check": false` from `composer.json` (Composer now enforces `"php": ">=8.3"` natively), and added `web/app/themes/starter-theme/.npmrc` with `engine-strict=true` (npm now enforces the theme's `package.json` `engines.node`). `doctor.ps1` still reports the detected versions but no longer duplicates the range checks.
 - Moved the coding-convention rules (architecture, blocks, security) out of `docs/planning/AGENTS.md` into a root `AGENTS.md`, so they survive `scripts/new-instance.ps1` and reach every generated project instead of being deleted with the rest of the starter's internal planning docs.
-- Folded `docs/BASELINE.md` into `AGENTS.md` and removed the duplicated block rules from `docs/BLOCKS.md` and the duplicated hooks list from `docs/PROJECT-CONFIG.md`; `docs/ARCHITECTURE.md` is now the single source for the baseline hooks (`starter_head`, `starter_body_open`, `starter_before_footer`).
+- Folded `docs/BASELINE.md` into `AGENTS.md` and removed the duplicated block rules from `docs/BLOCKS.md` and the duplicated hooks list from `docs/PROJECT-CONFIG.md`.
 - Folded `docs/SETUP.md` into `docs/CLONING.md` (they described the same onboarding flow from different angles) and removed it; `docs/CLONING.md` is now the single step-by-step setup doc.
+- Removed `docs/ARCHITECTURE.md`: its "Boundaries" rules moved into `AGENTS.md`, its "Design System" section was a duplicate of `docs/PROJECT-CONFIG.md`, its "Blocks" section duplicated `docs/BLOCKS.md`, and its "Baseline Hooks" list moved to `docs/PROJECT-CONFIG.md` (now the single source). The runtime diagram it linked is now linked directly from `README.md`.
 
 ## 1.0.0 - 2026-09-10
 

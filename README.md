@@ -32,14 +32,12 @@ See `docs/CLONING.md` for the full template-to-bootstrap workflow.
 
 ## Architecture
 
-- Bedrock: WordPress bootstrap, dependencies, environment config.
-- Sage: presentation, Blade, Tailwind, Gutenberg rendering.
-- `site-content`: future content/domain configuration boundary.
+Bedrock, Sage, and `site-content` each own a boundary of the stack — see `AGENTS.md` for the rules.
 
-See `docs/ARCHITECTURE.md`.
 See `docs/BLOCKS.md` to add blocks.
 See `docs/PROJECT-CONFIG.md` for environment, tokens, feature flags, menus, and hooks.
 See `AGENTS.md` for the coding conventions AI agents and contributors must follow, including cross-cutting accessibility, performance, SEO, analytics, forms, logging, and security rules.
+See `docs/runtime-architecture.html` for an interactive runtime diagram.
 
 ## Validation
 

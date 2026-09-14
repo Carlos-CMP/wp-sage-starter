@@ -2,8 +2,10 @@
 
 ## Architecture
 
-- Theme code is presentation only.
-- Content/domain configuration belongs in `site-content`.
+- Bedrock owns WordPress bootstrap, dependencies, and environment configuration; Sage owns presentation, Blade templates, Tailwind, and Gutenberg rendering; `site-content` owns CPTs, taxonomies, settings, feature flags, hooks, and filters.
+- Theme code is presentation only and must not contain project content models.
+- Content/domain configuration belongs in `site-content`, which must not depend on theme markup.
+- Theme code reads global settings through `site_content_setting($key, $default)`.
 - Secrets and environment values belong in `.env`.
 - Non-sensitive behavior belongs in versioned project config.
 
@@ -38,7 +40,7 @@
 
 ## Analytics And Marketing
 
-Add analytics or marketing snippets through the baseline hooks (see `docs/ARCHITECTURE.md`) from a project plugin or child project customization, instead of editing shared templates. Consent and provider choice belong to each generated project.
+Add analytics or marketing snippets through the baseline hooks (see `docs/PROJECT-CONFIG.md`) from a project plugin or child project customization, instead of editing shared templates. Consent and provider choice belong to each generated project.
 
 ## Forms
 
