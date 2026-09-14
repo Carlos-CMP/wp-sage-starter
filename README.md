@@ -50,4 +50,4 @@ To run WP-CLI directly: `.\scripts\wp.ps1 --info` (commands that load WordPress 
 
 Bedrock, Sage, and `site-content` each own a boundary of the stack — see `AGENTS.md` for the rules, including how to add a block.
 
-See `docs/runtime-architecture.html` for an interactive runtime diagram.
+See `docs/runtime-architecture/runtime-architecture.html` for an interactive runtime diagram.

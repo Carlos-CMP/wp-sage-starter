@@ -17,6 +17,7 @@
 - Removed `docs/BLOCKS.md`: its "copy folder, rename" steps were generic dev practice, and its "normalization in `render.php`, markup in `component.blade.php`" instruction restated `AGENTS.md`'s existing "no business logic in Blade" rule. Folded its remaining unique content — the block folder/file structure, registering editor UI in `resources/js/blocks.js`, and running `validate.ps1` after a change — into `AGENTS.md`'s Blocks section.
 - Moved `docs/planning/specs` to `docs/specs`, so `docs/planning` now holds only the implementation-plan doc; `docs/planning/README.md` was removed as no longer needed with a single file left.
 - `docs/planning` and `docs/specs` are no longer committed: the starter repo on GitHub is public, and neither folder adds anything for someone using the starter, so both are now `.gitignore`d and untracked (kept locally, not deleted). `scripts/new-instance.ps1` — whose only remaining job was removing them from a generated project — has no purpose left and was removed, along with its step in `README.md`'s setup instructions.
+- Moved the runtime diagram into its own folder, `docs/runtime-architecture/`, ahead of serving `docs/` via GitHub Pages.
 
 ## 1.0.0 - 2026-09-10
 
