@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "WP Sage Starter Runtime Architecture",
+    "output": "runtime-architecture.html",
+    "quality_profile": "showcase",
+    "viewBox": [1240, 760],
+    "repository": {
+      "url": "https://github.com/Carlos-CMP/wp-sage-starter",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "d3d3630b507f8916af9693f8a445e37416dff0ec"
+    }
+  },
+  "components": [
+    {
+      "id": "browser",
+      "type": "external",
+      "label": "Browser",
+      "sublabel": "Frontend request",
+      "pos": [40, 240],
+      "size": [140, 64]
+    },
+    {
+      "id": "localwp",
+      "type": "external",
+      "label": "LocalWP",
+      "sublabel": "Web server + PHP",
+      "pos": [210, 240],
+      "size": [170, 64]
+    },
+    {
+      "id": "entrypoint",
+      "type": "backend",
+      "label": "web/index.php",
+      "sublabel": "WordPress front controller",
+      "pos": [410, 240],
+      "size": [160, 64],
+      "sources": [{ "path": "web/index.php", "label": "Entry point" }]
+    },
+    {
+      "id": "bedrock",
+      "type": "backend",
+      "label": "Bedrock Bootstrap",
+      "sublabel": "Composer + config",
+      "pos": [610, 240],
+      "size": [190, 70],
+      "sources": [
+        { "path": "web/wp-config.php", "label": "WP config bridge" },
+        { "path": "config/application.php", "label": "Runtime config" }
+      ]
+    },
+    {
+      "id": "env",
+      "type": "security",
+      "label": ".env",
+      "sublabel": "URLs, DB credentials, salts",
+      "pos": [620, 80],
+      "size": [170, 64],
+      "sources": [{ "path": ".env.example", "label": "Environment template" }]
+    },
+    {
+      "id": "wordpress",
+      "type": "backend",
+      "label": "WordPress Core",
+      "sublabel": "roots/wordpress under web/wp",
+      "pos": [850, 240],
+      "size": [170, 64],
+      "sources": [{ "path": "composer.json", "label": "Runtime dependency" }]
+    },
+    {
+      "id": "database",
+      "type": "database",
+      "label": "MySQL",
+      "sublabel": "LocalWP database",
+      "pos": [850, 610],
+      "size": [170, 64]
+    },
+    {
+      "id": "theme",
+      "type": "frontend",
+      "label": "Sage Theme",
+      "sublabel": "Blade, Acorn, Vite assets",
+      "pos": [610, 450],
+      "size": [180, 70],
+      "sources": [
+        { "path": "web/app/themes/starter-theme/functions.php", "label": "Theme bootstrap" },
+        { "path": "web/app/themes/starter-theme/app/setup.php", "label": "Theme setup" }
+      ]
+    },
+    {
+      "id": "blocks",
+      "type": "frontend",
+      "label": "Gutenberg Blocks",
+      "sublabel": "Dynamic starter blocks",
+      "pos": [410, 450],
+      "size": [170, 64],
+      "sources": [{ "path": "web/app/themes/starter-theme/resources/views/blocks/hero/block.json", "label": "Block metadata" }]
+    },
+    {
+      "id": "siteContent",
+      "type": "backend",
+      "label": "site-content Plugin",
+      "sublabel": "Domain settings and feature flags",
+      "pos": [1045, 350],
+      "size": [190, 70],
+      "sources": [
+        { "path": "web/app/plugins/site-content/site-content.php", "label": "Plugin entry" },
+        { "path": "web/app/plugins/site-content/src/Plugin.php", "label": "Plugin boot" }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "browser-localwp",
+      "from": "browser",
+      "to": "localwp",
+      "label": "HTTP"
+    },
+    {
+      "id": "localwp-entry",
+      "from": "localwp",
+      "to": "entrypoint"
+    },
+    {
+      "id": "entry-bedrock",
+      "from": "entrypoint",
+      "to": "bedrock"
+    },
+    {
+      "id": "env-bedrock",
+      "from": "env",
+      "to": "bedrock",
+      "label": "runtime constants",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 24
+    },
+    {
+      "id": "bedrock-wordpress",
+      "from": "bedrock",
+      "to": "wordpress"
+    },
+    {
+      "id": "wordpress-db",
+      "from": "wordpress",
+      "to": "database",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "wordpress-theme",
+      "from": "wordpress",
+      "to": "theme",
+      "label": "active theme",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "theme-blocks",
+      "from": "theme",
+      "to": "blocks"
+    },
+    {
+      "id": "wordpress-plugin",
+      "from": "wordpress",
+      "to": "siteContent",
+      "label": "loads plugin",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ]
+}
