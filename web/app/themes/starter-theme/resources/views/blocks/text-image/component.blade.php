@@ -7,7 +7,7 @@
   <div class="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
     <div>
       @if ($title)
-        <h2 class="text-3xl font-semibold text-[var(--color-text)] md:text-4xl">{!! wp_kses_post($title) !!}</h2>
+        <h2 class="text-4xl font-bold text-[var(--color-text)] md:text-5xl">{!! wp_kses_post($title) !!}</h2>
       @endif
 
       @if ($text)
@@ -15,15 +15,15 @@
       @endif
 
       @if ($ctaLabel && $ctaUrl)
-        <a class="mt-7 inline-flex items-center rounded-md border border-[var(--color-border)] px-5 py-3 font-medium text-[var(--color-text)]" href="{{ esc_url($ctaUrl) }}">{!! wp_kses_post($ctaLabel) !!}</a>
+        <a class="mt-7 inline-flex items-center rounded-[var(--radius-control)] border border-[var(--color-text)] px-6 py-3 font-bold text-[var(--color-text)] transition hover:bg-[var(--color-text)] hover:text-white" href="{{ esc_url($ctaUrl) }}">{!! wp_kses_post($ctaLabel) !!}</a>
       @endif
     </div>
 
     <div class="{{ $imageClass }}">
       @if ($imageId)
-        {!! wp_get_attachment_image($imageId, 'large', false, ['class' => 'w-full rounded-lg object-cover']) !!}
+        {!! wp_get_attachment_image($imageId, 'large', false, ['class' => 'w-full rounded-[var(--radius-control)] object-cover']) !!}
       @elseif ($imageUrl)
-        <img class="w-full rounded-lg object-cover" src="{{ esc_url($imageUrl) }}" alt="{{ esc_attr($imageAlt) }}">
+        <img class="w-full rounded-[var(--radius-control)] object-cover" src="{{ esc_url($imageUrl) }}" alt="{{ esc_attr($imageAlt) }}">
       @endif
     </div>
   </div>
