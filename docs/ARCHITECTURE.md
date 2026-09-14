@@ -45,3 +45,7 @@ starter_head
 starter_body_open
 starter_before_footer
 ```
+
+## Runtime Diagram
+
+See `docs/runtime-architecture.html` for an interactive diagram of the runtime architecture. Its source data lives in `docs/runtime-architecture.architecture.json`.
