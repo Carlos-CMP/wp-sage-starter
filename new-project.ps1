@@ -14,12 +14,15 @@ $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 $theme = Join-Path $root 'web\app\themes\starter-theme'
 $envFile = Join-Path $root '.env'
-$php = 'C:\php83\php.exe'
-$composer = 'C:\ProgramData\ComposerSetup\bin\composer.phar'
-$node = 'C:\Program Files\nodejs\node.exe'
-$npm = 'C:\Program Files\nodejs\npm.cmd'
 $wp = Join-Path $root 'scripts\wp.ps1'
 $seed = Join-Path $root 'scripts\seed-demo-content.ps1'
+
+. (Join-Path $root 'scripts\_tools.ps1')
+
+$php = Get-PhpPath
+$composer = Get-ComposerPath
+$node = Get-NodePath
+$npm = Get-NpmPath
 
 function Assert-Path {
     param(
@@ -41,15 +44,16 @@ function New-Secret {
     return ($bytes | ForEach-Object { $_.ToString('x2') }) -join ''
 }
 
-Assert-Path $php 'PHP 8.3 not found at C:\php83\php.exe'
-Assert-Path $composer 'Composer PHAR not found at C:\ProgramData\ComposerSetup\bin\composer.phar'
-Assert-Path $node 'Node not found at C:\Program Files\nodejs\node.exe'
-Assert-Path $npm 'npm not found at C:\Program Files\nodejs\npm.cmd'
+if (-not $SkipInstall) {
+    Assert-Tool -Name 'PHP' -Path $php -EnvVar 'STARTER_PHP'
+    Assert-Tool -Name 'Composer' -Path $composer -EnvVar 'STARTER_COMPOSER'
+    Assert-Tool -Name 'Node' -Path $node -EnvVar 'STARTER_NODE'
+    Assert-Tool -Name 'npm' -Path $npm -EnvVar 'STARTER_NPM'
+}
+
 Assert-Path $wp 'WP-CLI wrapper not found at scripts\wp.ps1'
 Assert-Path $seed 'Demo seed script not found at scripts\seed-demo-content.ps1'
 
-& $node --version | Out-Null
-& $npm --version | Out-Null
 & $wp --info | Out-Null
 
 if ((-not (Test-Path -LiteralPath $envFile)) -or $ForceEnv) {
@@ -83,11 +87,13 @@ NONCE_SALT='$(New-Secret)'
 }
 
 if (-not $SkipInstall) {
-    & $php $composer install
+    Invoke-Composer -ComposerPath $composer -PhpPath $php -Arguments @('install')
     Push-Location $theme
     try {
         & $npm install
+        if ($LASTEXITCODE -ne 0) { throw "npm install failed with exit code $LASTEXITCODE" }
         & $npm run build
+        if ($LASTEXITCODE -ne 0) { throw "npm run build failed with exit code $LASTEXITCODE" }
     } finally {
         Pop-Location
     }

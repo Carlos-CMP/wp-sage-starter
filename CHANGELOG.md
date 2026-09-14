@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Bootstrap scripts (`doctor.ps1`, `new-project.ps1`, `validate.ps1`, `wp.ps1`) now resolve PHP, Composer, Node, npm, WP-CLI, and Git from PATH instead of hardcoded machine-specific paths, with optional `STARTER_*` environment variable overrides.
+- Fixed `doctor.ps1` crashing instead of reporting a clean error when an invoked tool (e.g. WP-CLI) fails.
+
 ## 1.0.0 - 2026-09-10
 
 - Initial Bedrock and Sage starter foundation.

@@ -4,15 +4,16 @@ This repository is meant to be cloned as the base for a new WordPress project. T
 
 ## Required Local Tools
 
-Use the preferred paths expected by the starter:
+The scripts resolve these from PATH — install them normally and there is nothing to configure:
 
-- PHP: `C:\php83\php.exe`
-- Composer: `C:\ProgramData\ComposerSetup\bin\composer.phar`
-- WP-CLI: `C:\wp-cli\wp-cli.phar`
-- Git: `C:\Program Files\Git\cmd\git.exe`
-- Node: `C:\Program Files\nodejs\node.exe`
-- npm: `C:\Program Files\nodejs\npm.cmd`
+- PHP >= 8.3
+- Composer >= 2.x
+- WP-CLI (the `wp` command)
+- Git
+- Node.js current LTS (and npm)
 - LocalWP recommended
+
+If a tool isn't on PATH, or you need to pin a specific installation, set the matching environment variable to its executable path instead of editing any script: `STARTER_PHP`, `STARTER_COMPOSER`, `STARTER_WP_CLI`, `STARTER_GIT`, `STARTER_NODE`, `STARTER_NPM`.
 
 Check the machine before bootstrapping:
 

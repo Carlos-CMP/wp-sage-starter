@@ -5,16 +5,16 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$php = 'C:\php83\php.exe'
-$wpCli = 'C:\wp-cli\wp-cli.phar'
+. (Join-Path $PSScriptRoot '_tools.ps1')
 
-if (-not (Test-Path -LiteralPath $php)) {
-    throw "PHP 8.3 not found at $php"
+$php = Get-PhpPath
+$wpCli = Get-WpCliPath
+
+Assert-Tool -Name 'WP-CLI' -Path $wpCli -EnvVar 'STARTER_WP_CLI'
+
+if ($wpCli -like '*.phar') {
+    Assert-Tool -Name 'PHP' -Path $php -EnvVar 'STARTER_PHP'
 }
 
-if (-not (Test-Path -LiteralPath $wpCli)) {
-    throw "WP-CLI not found at $wpCli"
-}
-
-& $php $wpCli @WpArgs
-exit $LASTEXITCODE
+$exitCode = Invoke-WpCli -WpCliPath $wpCli -Arguments $WpArgs -PhpPath $php
+exit $exitCode

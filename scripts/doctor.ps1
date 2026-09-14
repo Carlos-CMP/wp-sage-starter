@@ -9,15 +9,31 @@ $root = Split-Path -Parent $PSScriptRoot
 $theme = Join-Path $root 'web\app\themes\starter-theme'
 $envFile = Join-Path $root '.env'
 
+. (Join-Path $PSScriptRoot '_tools.ps1')
+
+$envVars = @{
+    PHP = 'STARTER_PHP'
+    Composer = 'STARTER_COMPOSER'
+    WPCLI = 'STARTER_WP_CLI'
+    Git = 'STARTER_GIT'
+    Node = 'STARTER_NODE'
+    Npm = 'STARTER_NPM'
+}
+
+$localWpCandidates = @(
+    'C:\Program Files\Local\Local.exe',
+    'C:\Program Files (x86)\Local\Local.exe'
+)
+
 $paths = @{
-    PHP = 'C:\php83\php.exe'
-    Composer = 'C:\ProgramData\ComposerSetup\bin\composer.phar'
-    WPCLI = 'C:\wp-cli\wp-cli.phar'
+    PHP = Get-PhpPath
+    Composer = Get-ComposerPath
+    WPCLI = Get-WpCliPath
     WPWrapper = Join-Path $root 'scripts\wp.ps1'
-    Git = 'C:\Program Files\Git\cmd\git.exe'
-    Node = 'C:\Program Files\nodejs\node.exe'
-    Npm = 'C:\Program Files\nodejs\npm.cmd'
-    LocalWP = 'C:\Program Files (x86)\Local\Local.exe'
+    Git = Get-GitPath
+    Node = Get-NodePath
+    Npm = Get-NpmPath
+    LocalWP = $localWpCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 }
 
 $results = New-Object System.Collections.Generic.List[object]
@@ -48,12 +64,16 @@ function Invoke-Capture {
 
     try {
         $output = & $Command 2>&1
+        $exitCode = $LASTEXITCODE
+    } catch {
+        $output = $_.Exception.Message
+        $exitCode = 1
     } finally {
         $ErrorActionPreference = $previousErrorActionPreference
     }
 
     return [pscustomobject] @{
-        ExitCode = $LASTEXITCODE
+        ExitCode = $exitCode
         Output = ($output -join "`n").Trim()
     }
 }
@@ -107,14 +127,15 @@ function Read-EnvKeys {
 }
 
 foreach ($tool in @('PHP', 'Composer', 'WPCLI', 'WPWrapper', 'Git', 'Node', 'Npm')) {
-    if (Test-Path -LiteralPath $paths[$tool]) {
+    if ($paths[$tool]) {
         Add-Result 'OK' $tool "$tool found at $($paths[$tool])"
     } else {
-        Add-Result 'ERROR' $tool "$tool missing at $($paths[$tool])"
+        $hint = if ($envVars.ContainsKey($tool)) { " Install it and ensure it's on PATH, or set `$env:$($envVars[$tool]) to its executable path." } else { '' }
+        Add-Result 'ERROR' $tool "$tool not found on PATH.$hint"
     }
 }
 
-if (Test-Path -LiteralPath $paths.PHP) {
+if ($paths.PHP) {
     $phpVersion = Invoke-Capture { & $paths.PHP -r 'echo PHP_VERSION;' }
     if (($phpVersion.ExitCode -eq 0) -and (Test-VersionAtLeast $phpVersion.Output 8 3)) {
         Add-Result 'OK' 'PHP version' "PHP $($phpVersion.Output)"
@@ -123,16 +144,21 @@ if (Test-Path -LiteralPath $paths.PHP) {
     }
 }
 
-if ((Test-Path -LiteralPath $paths.PHP) -and (Test-Path -LiteralPath $paths.Composer)) {
-    $composerVersion = Invoke-Capture { & $paths.PHP $paths.Composer --version }
-    if ($composerVersion.ExitCode -eq 0) {
+if ($paths.Composer) {
+    $composerVersion = if ($paths.Composer -like '*.phar') {
+        if ($paths.PHP) { Invoke-Capture { & $paths.PHP $paths.Composer --version } } else { $null }
+    } else {
+        Invoke-Capture { & $paths.Composer --version }
+    }
+
+    if ($composerVersion -and $composerVersion.ExitCode -eq 0) {
         Add-Result 'OK' 'Composer runtime' $composerVersion.Output.Split("`n")[0]
     } else {
-        Add-Result 'ERROR' 'Composer runtime' 'Composer cannot run with PHP 8.3' $composerVersion.Output
+        Add-Result 'ERROR' 'Composer runtime' 'Composer failed to run' ($composerVersion.Output)
     }
 }
 
-if (Test-Path -LiteralPath $paths.Git) {
+if ($paths.Git) {
     $gitVersion = Invoke-Capture { & $paths.Git --version }
     if ($gitVersion.ExitCode -eq 0) {
         Add-Result 'OK' 'Git version' $gitVersion.Output
@@ -141,7 +167,7 @@ if (Test-Path -LiteralPath $paths.Git) {
     }
 }
 
-if (Test-Path -LiteralPath $paths.Node) {
+if ($paths.Node) {
     $nodeVersion = Invoke-Capture { & $paths.Node --version }
     if (($nodeVersion.ExitCode -eq 0) -and (Test-NodeVersion $nodeVersion.Output)) {
         Add-Result 'OK' 'Node version' "$($nodeVersion.Output) satisfies $((Get-Content -Raw (Join-Path $theme 'package.json') | ConvertFrom-Json).engines.node)"
@@ -150,7 +176,7 @@ if (Test-Path -LiteralPath $paths.Node) {
     }
 }
 
-if (Test-Path -LiteralPath $paths.Npm) {
+if ($paths.Npm) {
     $npmVersion = Invoke-Capture { & $paths.Npm --version }
     if ($npmVersion.ExitCode -eq 0) {
         Add-Result 'OK' 'npm version' $npmVersion.Output
@@ -159,12 +185,17 @@ if (Test-Path -LiteralPath $paths.Npm) {
     }
 }
 
-if ((Test-Path -LiteralPath $paths.PHP) -and (Test-Path -LiteralPath $paths.WPCLI)) {
-    $wpInfo = Invoke-Capture { & $paths.PHP $paths.WPCLI --info }
-    if ($wpInfo.ExitCode -eq 0) {
-        Add-Result 'OK' 'WP-CLI runtime' 'WP-CLI runs with PHP 8.3'
+if ($paths.WPCLI) {
+    $wpInfo = if ($paths.WPCLI -like '*.phar') {
+        if ($paths.PHP) { Invoke-Capture { & $paths.PHP $paths.WPCLI --info } } else { $null }
     } else {
-        Add-Result 'ERROR' 'WP-CLI runtime' 'WP-CLI cannot run with PHP 8.3' $wpInfo.Output
+        Invoke-Capture { & $paths.WPCLI --info }
+    }
+
+    if ($wpInfo -and $wpInfo.ExitCode -eq 0) {
+        Add-Result 'OK' 'WP-CLI runtime' 'WP-CLI runs'
+    } else {
+        Add-Result 'ERROR' 'WP-CLI runtime' 'WP-CLI failed to run' ($wpInfo.Output)
     }
 }
 

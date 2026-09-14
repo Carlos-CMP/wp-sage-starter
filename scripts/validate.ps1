@@ -4,16 +4,16 @@ $ErrorActionPreference = 'Stop'
 
 $root = Split-Path -Parent $PSScriptRoot
 $theme = Join-Path $root 'web\app\themes\starter-theme'
-$php = 'C:\php83\php.exe'
-$composer = 'C:\ProgramData\ComposerSetup\bin\composer.phar'
 
-if (-not (Test-Path -LiteralPath $php)) {
-    throw "PHP 8.3 not found at $php"
-}
+. (Join-Path $PSScriptRoot '_tools.ps1')
 
-if (-not (Test-Path -LiteralPath $composer)) {
-    throw "Composer PHAR not found at $composer"
-}
+$php = Get-PhpPath
+$composer = Get-ComposerPath
+$npm = Get-NpmPath
+
+Assert-Tool -Name 'PHP' -Path $php -EnvVar 'STARTER_PHP'
+Assert-Tool -Name 'Composer' -Path $composer -EnvVar 'STARTER_COMPOSER'
+Assert-Tool -Name 'npm' -Path $npm -EnvVar 'STARTER_NPM'
 
 function Invoke-Checked {
     param(
@@ -27,14 +27,14 @@ function Invoke-Checked {
     }
 }
 
-Invoke-Checked { & $php $composer validate --strict }
-Invoke-Checked { & $php $composer lint }
+Invoke-Composer -ComposerPath $composer -PhpPath $php -Arguments @('validate', '--strict')
+Invoke-Composer -ComposerPath $composer -PhpPath $php -Arguments @('lint')
 
 Push-Location $theme
 try {
-    Invoke-Checked { & npm run lint }
-    Invoke-Checked { & npm run format }
-    Invoke-Checked { & npm run build }
+    Invoke-Checked { & $npm run lint }
+    Invoke-Checked { & $npm run format }
+    Invoke-Checked { & $npm run build }
 } finally {
     Pop-Location
 }
