@@ -1,17 +1,36 @@
-# Cloning The Starter
+# Starting A Project From The Starter
 
-This repository is meant to be cloned as the base for a new WordPress project. The generated project owns its future changes.
+This repository is a GitHub template repository, meant as the base for a new WordPress project. The generated project owns its future changes.
+
+This starter targets Windows + LocalWP only. The bootstrap scripts are PowerShell and `scripts/link-localwp.ps1` relies on Windows-only NTFS junctions — there is no macOS/Linux or non-LocalWP setup path.
+
+## Create The Project Repository
+
+Use GitHub's **Use this template** button on the starter repository, not `git clone`. This creates a new repository with a single commit and no `origin` pointing back to the starter, so the new project owns its history from commit 1 with no risk of pushing project-specific commits back into the shared starter.
+
+Then clone your new repository as usual.
+
+## Remove The Starter's Planning Docs
+
+Right after cloning your new repository, remove the starter's own internal build/planning docs (not relevant to a client project):
+
+```powershell
+.\scripts\new-instance.ps1
+```
+
+It asks for confirmation; pass `-Force` to skip the prompt. If `docs/planning` is already gone, it's a no-op.
 
 ## Required Local Tools
 
 The scripts resolve these from PATH — install them normally and there is nothing to configure:
 
+- Windows
+- LocalWP, with WordPress already installed on the site you create
 - PHP >= 8.3
 - Composer >= 2.x
 - WP-CLI (the `wp` command)
 - Git
-- Node.js current LTS (and npm)
-- LocalWP recommended
+- Node.js (and npm) matching `web/app/themes/starter-theme/package.json` engines (currently `^20.19.0` or `>=22.12.0`)
 
 If a tool isn't on PATH, or you need to pin a specific installation, set the matching environment variable to its executable path instead of editing any script: `STARTER_PHP`, `STARTER_COMPOSER`, `STARTER_WP_CLI`, `STARTER_GIT`, `STARTER_NODE`, `STARTER_NPM`.
 
@@ -21,22 +40,11 @@ Check the machine before bootstrapping:
 .\scripts\doctor.ps1
 ```
 
-## Detach From The Starter
-
-Right after cloning, before running anything else, turn the clone into an independent project:
-
-```powershell
-.\scripts\new-instance.ps1
-```
-
-This removes `docs/planning` (the starter's own internal build docs, not relevant to a client project) and resets git history to a single commit with no starter remote attached, so the new project owns its history from commit 1. It asks for confirmation and requires a clean working tree; pass `-Force` to skip the prompt, or `-KeepPlanningDocs` to keep the planning docs.
-
 ## LocalWP Flow
 
-1. Create a new site in LocalWP.
+1. Create a new site in LocalWP (see "Create The Project Repository" and "Remove The Starter's Planning Docs" above if you haven't already).
 2. Use the project name as the LocalWP site domain when possible.
-3. Clone this repository outside or inside `~/Local Sites`, then run `.\scripts\new-instance.ps1` as described above.
-4. Link LocalWP's `app/public` directory to the starter `web` directory:
+3. Link LocalWP's `app/public` directory to your project's `web` directory:
 
 ```powershell
 .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\starter-sage-wp"

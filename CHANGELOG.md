@@ -3,7 +3,8 @@
 ## Unreleased
 
 - Bootstrap scripts (`doctor.ps1`, `new-project.ps1`, `validate.ps1`, `wp.ps1`) now resolve PHP, Composer, Node, npm, WP-CLI, and Git from PATH instead of hardcoded machine-specific paths, with optional `STARTER_*` environment variable overrides.
-- Added `scripts/new-instance.ps1` to detach a fresh clone from the starter: drops `docs/planning` and resets git history to a single commit with no starter remote.
+- The starter repository on GitHub is now a template repository. New projects are created with **Use this template**, which starts the new repository with a single commit and no `origin` pointing back to the starter — `git clone` should no longer be used to start a new project.
+- `scripts/new-instance.ps1` no longer touches git history or remotes (GitHub's template feature handles that); it now only drops `docs/planning` from a freshly created project.
 - Fixed `doctor.ps1` crashing instead of reporting a clean error when an invoked tool (e.g. WP-CLI) fails.
 - `new-project.ps1` now checks `wp core is-installed` before activating the plugin/theme, and checks the exit code of every WP-CLI call, instead of silently reporting "Bootstrap complete" after a failed step.
 - `scripts/seed-demo-content.ps1` now seeds a single Hero block on the `Starter Components` homepage instead of one of each starter block.

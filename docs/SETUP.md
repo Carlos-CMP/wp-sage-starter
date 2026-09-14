@@ -1,8 +1,8 @@
 # Setup
 
-LocalWP is the recommended local runtime. The starter does not control LocalWP directly.
+This starter targets Windows + LocalWP only — the bootstrap scripts are PowerShell and rely on Windows-only NTFS junctions, and no other local runtime is documented or supported. The starter does not control LocalWP directly.
 
-Right after cloning, run `.\scripts\new-instance.ps1` once to detach the clone from the starter (drops internal planning docs, resets git history, removes the starter remote) before doing anything else. See `docs/CLONING.md`.
+Create your project repository from this starter using GitHub's **Use this template** button (not `git clone` — see `docs/CLONING.md`), then clone your new repository. Right after cloning, run `.\scripts\new-instance.ps1` once to drop the starter's internal planning docs before doing anything else.
 
 ## Environment
 
