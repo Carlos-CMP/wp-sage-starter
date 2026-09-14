@@ -26,10 +26,4 @@ Each block owns:
 .\scripts\validate.ps1
 ```
 
-## Rules
-
-- Use native Gutenberg attributes.
-- Use `InnerBlocks` for repeated or nested content.
-- Do not use ACF Blocks, repeaters, flexible content, clone fields, or Options Pages.
-- Do not put business logic in Blade.
-- Consume design tokens instead of hardcoding brand values.
+See `AGENTS.md` for the block rules (Gutenberg attributes, `InnerBlocks`, no ACF Blocks, no business logic in Blade, design tokens).

@@ -60,11 +60,7 @@ Theme locations:
 
 ## Hooks
 
-Use baseline hooks instead of editing shared templates for snippets:
-
-- `starter_head`
-- `starter_body_open`
-- `starter_before_footer`
+See `docs/ARCHITECTURE.md` ("Baseline Hooks") for the hooks available for snippets instead of editing shared templates.
 
 ## Validation
 

@@ -37,10 +37,9 @@ See `docs/CLONING.md` for the template workflow and `docs/SETUP.md` for local se
 - `site-content`: future content/domain configuration boundary.
 
 See `docs/ARCHITECTURE.md`.
-See `docs/BASELINE.md` for cross-cutting accessibility, performance, SEO, analytics, forms, logging, and security conventions.
 See `docs/BLOCKS.md` to add blocks.
 See `docs/PROJECT-CONFIG.md` for environment, tokens, feature flags, menus, and hooks.
-See `AGENTS.md` for the coding conventions AI agents and contributors must follow.
+See `AGENTS.md` for the coding conventions AI agents and contributors must follow, including cross-cutting accessibility, performance, SEO, analytics, forms, logging, and security rules.
 
 ## Validation
 
