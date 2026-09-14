@@ -9,6 +9,7 @@
 - `new-project.ps1` now checks `wp core is-installed` before activating the plugin/theme, and checks the exit code of every WP-CLI call, instead of silently reporting "Bootstrap complete" after a failed step.
 - `scripts/seed-demo-content.ps1` now seeds a single Hero block on the `Starter Components` homepage instead of one of each starter block.
 - PHP and Node version requirements are now enforced by Composer and npm themselves instead of custom checks in `doctor.ps1`: removed `"platform-check": false` from `composer.json` (Composer now enforces `"php": ">=8.3"` natively), and added `web/app/themes/starter-theme/.npmrc` with `engine-strict=true` (npm now enforces the theme's `package.json` `engines.node`). `doctor.ps1` still reports the detected versions but no longer duplicates the range checks.
+- Moved the coding-convention rules (architecture, blocks, security) out of `docs/planning/AGENTS.md` into a root `AGENTS.md`, so they survive `scripts/new-instance.ps1` and reach every generated project instead of being deleted with the rest of the starter's internal planning docs.
 
 ## 1.0.0 - 2026-09-10
 

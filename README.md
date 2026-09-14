@@ -40,6 +40,7 @@ See `docs/ARCHITECTURE.md`.
 See `docs/BASELINE.md` for cross-cutting accessibility, performance, SEO, analytics, forms, logging, and security conventions.
 See `docs/BLOCKS.md` to add blocks.
 See `docs/PROJECT-CONFIG.md` for environment, tokens, feature flags, menus, and hooks.
+See `AGENTS.md` for the coding conventions AI agents and contributors must follow.
 
 ## Validation
 
