@@ -55,8 +55,6 @@ To run WP-CLI directly: `.\scripts\wp.ps1 --info` (commands that load WordPress 
 
 ## Architecture
 
-Bedrock, Sage, and `site-content` each own a boundary of the stack — see `AGENTS.md` for the rules.
+Bedrock, Sage, and `site-content` each own a boundary of the stack — see `AGENTS.md` for the rules, including how to add a block.
 
-See `docs/BLOCKS.md` to add blocks.
-See `AGENTS.md` for the coding conventions AI agents and contributors must follow: architecture, design tokens, feature flags, menus, hooks, and cross-cutting accessibility, performance, SEO, analytics, forms, logging, and security rules.
 See `docs/runtime-architecture.html` for an interactive runtime diagram.

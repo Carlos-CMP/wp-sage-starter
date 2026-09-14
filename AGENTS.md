@@ -14,11 +14,14 @@
 
 ## Blocks
 
+- Blocks live in `web/app/themes/starter-theme/resources/views/blocks/<slug>/`; each owns `block.json`, `render.php`, `component.blade.php`, and a short `README.md`.
 - Blocks must be modular and independently removable.
 - Do not use ACF Pro APIs, ACF Blocks, repeaters, flexible content, clone fields, or Options Pages.
 - Use Gutenberg attributes and `InnerBlocks` for repeated or nested content.
-- Do not put business logic in Blade.
+- Do not put business logic in Blade: keep input normalization in `render.php` and markup in `component.blade.php`.
 - Components consume design tokens.
+- Register editor UI in `resources/js/blocks.js`.
+- Run `.\scripts\validate.ps1` after adding or changing a block.
 
 ## Accessibility
 
