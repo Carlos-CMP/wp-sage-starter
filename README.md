@@ -16,7 +16,11 @@ The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a 
 
 ## Setup
 
-1. GitHub → **Use this template** to create your own repository from this starter, then `git clone` *that* repository.
+1. GitHub → **Use this template** on this repo to create your own, then clone *that* one:
+
+   ```powershell
+   git clone https://github.com/<your-account>/<your-new-repo>.git
+   ```
 2. ```powershell
    .\scripts\doctor.ps1
    ```

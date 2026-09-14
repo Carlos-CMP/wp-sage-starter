@@ -23,6 +23,7 @@
 - Reformatted README's Setup as a bare command list: dropped the per-step prose (what each script does internally, the `.env` key list) in favor of just the commands to run, pointing to `.env.example` for the keys instead of repeating them.
 - Dropped Windows and LocalWP from README's Requirements list and its explanatory paragraph — taken as a given rather than called out. The rest of the doc (PowerShell scripts, `link-localwp.ps1`) still assumes both.
 - Fixed README's Setup step 1 reading as if cloning wasn't needed at all: trimming "(not `git clone` — that keeps the starter's own history and `origin`)" down to "(not `git clone`)" made it ambiguous. Reworded to make clear you still `git clone` your own new repository, just not the starter's directly.
+- Gave Setup step 1 an actual copy-pasteable `git clone` command (with account/repo placeholders), matching the rest of the list instead of being the only step without one.
 - Shortened the Node.js requirement in README to just "Node.js": the specific version range is already enforced by `engine-strict` at `npm install` time, so restating it was redundant.
 
 ## 1.0.0 - 2026-09-10
