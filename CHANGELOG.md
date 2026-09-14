@@ -20,6 +20,7 @@
 - Moved the runtime diagram into its own folder, `docs/runtime-architecture/`, ahead of serving `docs/` via GitHub Pages.
 - Enabled GitHub Pages (source: `main` branch, `/docs` folder), so the interactive runtime diagram is now viewable live at https://carlos-cmp.github.io/wp-sage-starter/runtime-architecture/runtime-architecture.html instead of only as raw HTML source in the GitHub file browser. `README.md` links there.
 - Trimmed README's Architecture section to just the diagram link; dropped its prose restating Bedrock/Sage/site-content boundaries and its pointer to `AGENTS.md` — `AGENTS.md` is still a root file every AI coding tool reads by convention, just no longer cross-linked from the README.
+- Reformatted README's Setup as a bare command list: dropped the per-step prose (what each script does internally, the `.env` key list) in favor of just the commands to run, pointing to `.env.example` for the keys instead of repeating them.
 
 ## 1.0.0 - 2026-09-10
 

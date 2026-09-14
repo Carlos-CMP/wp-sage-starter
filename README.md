@@ -20,31 +20,22 @@ The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a 
 
 ## Setup
 
-1. Create a new repository from this starter using GitHub's **Use this template** button (not `git clone` — that keeps the starter's own history and `origin`), then clone your new repository.
-2. Check your machine against the requirements above:
-
-   ```powershell
+1. GitHub → **Use this template** (not `git clone`), then clone your new repository.
+2. ```powershell
    .\scripts\doctor.ps1
    ```
-3. Create a LocalWP site with WordPress installed, then link its `app/public` to this repository's `web` directory (moves the existing `app/public` to a timestamped backup and creates a junction):
-
-   ```powershell
+3. ```powershell
    .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\starter-sage-wp"
    ```
-4. Bootstrap, using the DB host and frontend URL shown by LocalWP:
-
-   ```powershell
+4. ```powershell
    .\new-project.ps1 -ProjectName "My Project" -Domain "my-project.local" -DbHost "127.0.0.1:10023"
    ```
-
-   Use `-Domain "localhost:<port>"` when LocalWP is in localhost Routing Mode. This creates `.env` when missing (holding `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `WP_HOME`, `WP_SITEURL`, and the WordPress salts — keep it out of version control), installs dependencies, builds the theme, activates the starter plugin/theme, configures permalinks, and seeds the `Starter Components` homepage.
-5. Validate:
-
-   ```powershell
+   Use `-Domain "localhost:<port>"` in LocalWP's localhost Routing Mode. `.env` keys: see `.env.example`.
+5. ```powershell
    .\scripts\validate.ps1
    ```
 
-To run WP-CLI directly: `.\scripts\wp.ps1 --info` (commands that load WordPress require `.env` with LocalWP database and URL values). To re-seed the demo homepage later without re-running the full bootstrap: `.\scripts\seed-demo-content.ps1`.
+Other commands: `.\scripts\wp.ps1 --info` (WP-CLI), `.\scripts\seed-demo-content.ps1` (re-seed demo homepage).
 
 ## Architecture
 
