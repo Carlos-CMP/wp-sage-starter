@@ -6,10 +6,6 @@ This starter is a template of origin. Generated projects evolve independently.
 
 ## Requirements
 
-This starter targets Windows + LocalWP. The bootstrap scripts are PowerShell (`.ps1`) and `scripts/link-localwp.ps1` relies on Windows-only NTFS junctions — there is no macOS/Linux or non-LocalWP setup path.
-
-- Windows
-- LocalWP, with WordPress already installed on the site you create
 - PHP >= 8.3
 - Composer >= 2.x
 - Node.js matching `web/app/themes/starter-theme/package.json` engines (currently `^20.19.0` or `>=22.12.0`)
