@@ -28,7 +28,7 @@ Create a new repository from this starter using GitHub's **Use this template** b
 
 Use `-Domain "localhost:<port>"` when LocalWP is in localhost Routing Mode.
 
-See `docs/CLONING.md` for the template workflow and `docs/SETUP.md` for local setup notes.
+See `docs/CLONING.md` for the full template-to-bootstrap workflow.
 
 ## Architecture
 

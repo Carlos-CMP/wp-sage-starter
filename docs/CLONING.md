@@ -70,6 +70,24 @@ Localhost Routing Mode:
 
 The script creates `.env` when missing, installs dependencies, builds the theme, activates the starter plugin/theme, configures permalinks, and seeds the starter pages.
 
+`.env` holds `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `WP_HOME`, `WP_SITEURL`, and the WordPress salts. Keep it out of version control.
+
+## WP-CLI
+
+```powershell
+.\scripts\wp.ps1 --info
+```
+
+Commands that load WordPress require `.env` with LocalWP database and URL values.
+
+## Re-seeding Demo Content
+
+Bootstrap already seeds the `Starter Components` homepage. To reseed it later without re-running the full bootstrap:
+
+```powershell
+.\scripts\seed-demo-content.ps1
+```
+
 ## After Bootstrap
 
 Validate the project:
