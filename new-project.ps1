@@ -44,6 +44,15 @@ function New-Secret {
     return ($bytes | ForEach-Object { $_.ToString('x2') }) -join ''
 }
 
+function Invoke-WpChecked {
+    param([Parameter(ValueFromRemainingArguments = $true)] [string[]] $Arguments)
+
+    & $wp @Arguments | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+        throw "wp $($Arguments -join ' ') failed with exit code $LASTEXITCODE"
+    }
+}
+
 if (-not $SkipInstall) {
     Assert-Tool -Name 'PHP' -Path $php -EnvVar 'STARTER_PHP'
     Assert-Tool -Name 'Composer' -Path $composer -EnvVar 'STARTER_COMPOSER'
@@ -99,12 +108,19 @@ if (-not $SkipInstall) {
     }
 }
 
-& $wp plugin activate site-content | Out-Null
-& $wp theme activate starter-theme | Out-Null
-& $wp option update blogname $ProjectName | Out-Null
-& $wp option update permalink_structure '/%postname%/' | Out-Null
-& $wp rewrite flush | Out-Null
-& $seed | Out-Null
+& $wp core is-installed | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    throw "WordPress is not installed in the database at the DB_HOST configured in .env. Create the LocalWP site with WordPress already installed, then link it with scripts\link-localwp.ps1 before running this script."
+}
+
+Invoke-WpChecked plugin activate site-content
+Invoke-WpChecked theme activate starter-theme
+Invoke-WpChecked option update blogname $ProjectName
+Invoke-WpChecked option update permalink_structure '/%postname%/'
+Invoke-WpChecked rewrite flush
+
+& $seed
+if ($LASTEXITCODE -ne 0) { throw "seed-demo-content.ps1 failed with exit code $LASTEXITCODE" }
 
 "Bootstrap complete"
 "Site: http://$Domain"
