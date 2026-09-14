@@ -48,6 +48,4 @@ To run WP-CLI directly: `.\scripts\wp.ps1 --info` (commands that load WordPress 
 
 ## Architecture
 
-Bedrock, Sage, and `site-content` each own a boundary of the stack — see `AGENTS.md` for the rules, including how to add a block.
-
-See the interactive runtime diagram at https://carlos-cmp.github.io/wp-sage-starter/runtime-architecture/runtime-architecture.html (source: `docs/runtime-architecture/`).
+https://carlos-cmp.github.io/wp-sage-starter/runtime-architecture/runtime-architecture.html
