@@ -3,33 +3,18 @@
   "type": "project",
   "license": "MIT",
   "description": "Reusable WordPress starter built on Bedrock and Sage.",
-  "homepage": "https://roots.io/bedrock/",
+  "homepage": "https://github.com/Carlos-CMP/wp-sage-starter",
   "authors": [
     {
-      "name": "Scott Walkinshaw",
-      "email": "scott.walkinshaw@gmail.com",
-      "homepage": "https://github.com/swalkinshaw"
-    },
-    {
-      "name": "Ben Word",
-      "email": "ben@benword.com",
-      "homepage": "https://github.com/retlehs"
+      "name": "Novicell"
     }
   ],
   "keywords": [
     "bedrock", "composer", "roots", "wordpress-composer", "wordpress", "wp-composer", "wp-config", "wp"
   ],
   "support": {
-    "issues": "https://github.com/roots/bedrock/issues",
-    "forum": "https://discourse.roots.io/category/bedrock"
+    "issues": "https://github.com/Carlos-CMP/wp-sage-starter/issues"
   },
-  "repositories": [
-    {
-      "name": "wp-packages",
-      "type": "composer",
-      "url": "https://repo.wp-packages.org"
-    }
-  ],
   "require": {
     "php": ">=8.3",
     "composer/installers": "^2.0",
@@ -39,8 +24,7 @@
     "roots/sage": "^11.2",
     "roots/wordpress": "^7.1",
     "roots/wp-config": "^1.0",
-    "vlucas/phpdotenv": "^5.0",
-    "wp-theme/twentytwentyfive": "^1.0"
+    "vlucas/phpdotenv": "^5.0"
   },
   "require-dev": {
     "laravel/pint": "^1.0",
