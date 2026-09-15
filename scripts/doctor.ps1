@@ -20,11 +20,6 @@ $envVars = @{
     Npm = 'STARTER_NPM'
 }
 
-$localWpCandidates = @(
-    'C:\Program Files\Local\Local.exe',
-    'C:\Program Files (x86)\Local\Local.exe'
-)
-
 $paths = @{
     PHP = Get-PhpPath
     Composer = Get-ComposerPath
@@ -33,7 +28,6 @@ $paths = @{
     Git = Get-GitPath
     Node = Get-NodePath
     Npm = Get-NpmPath
-    LocalWP = $localWpCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 }
 
 $results = New-Object System.Collections.Generic.List[object]
@@ -183,12 +177,6 @@ if (Test-Path -LiteralPath $envFile) {
     Add-Result 'WARN' '.env' '.env is missing; bootstrap can create it when DbHost is provided'
 }
 
-if ($paths.LocalWP) {
-    Add-Result 'OK' 'LocalWP' "LocalWP found at $($paths.LocalWP)"
-} else {
-    Add-Result 'WARN' 'LocalWP' "LocalWP not found at $($localWpCandidates -join ' or ')"
-}
-
 $sitesFile = Join-Path $env:APPDATA 'Local\sites.json'
 $statusesFile = Join-Path $env:APPDATA 'Local\site-statuses.json'
 
@@ -210,7 +198,9 @@ if ((Test-Path -LiteralPath $sitesFile) -and (Test-Path -LiteralPath $statusesFi
         }
     }
 
-    Add-Result 'OK' 'LocalWP sites' 'LocalWP site metadata detected' $localSites
+    Add-Result 'OK' 'LocalWP' 'LocalWP site metadata detected' $localSites
+} else {
+    Add-Result 'WARN' 'LocalWP' 'No LocalWP site metadata found; create a site in Local before running new-project.ps1'
 }
 
 if (Test-Path -LiteralPath $envFile) {
