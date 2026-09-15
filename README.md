@@ -37,10 +37,10 @@ The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a 
    ```powershell
    .\scripts\doctor.ps1
    ```
-3. Point LocalWP at this repo (requires a LocalWP site already created with WordPress installed):
+3. Point LocalWP at this repo (requires a LocalWP site already created with WordPress installed — `<your-local-site-name>` is whatever you named it in Local):
 
    ```powershell
-   .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\starter-sage-wp"
+   .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\<your-local-site-name>"
    ```
 4. Install and configure the project:
 
