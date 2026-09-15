@@ -25,17 +25,25 @@ The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a 
    git clone https://github.com/<your-account>/<your-new-repo>.git
    cd <your-new-repo>
    ```
-3. ```powershell
+3. Check requirements:
+
+   ```powershell
    .\scripts\doctor.ps1
    ```
-4. ```powershell
+4. Point LocalWP at this repo (requires a LocalWP site already created with WordPress installed):
+
+   ```powershell
    .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\starter-sage-wp"
    ```
-5. ```powershell
+5. Install and configure the project:
+
+   ```powershell
    .\scripts\new-project.ps1 -ProjectName "My Project" -Domain "my-project.local" -DbHost "127.0.0.1:10023"
    ```
    Use `-Domain "localhost:<port>"` in LocalWP's localhost Routing Mode. `.env` keys: see `.env.example`.
-6. ```powershell
+6. Final check:
+
+   ```powershell
    .\scripts\validate.ps1
    ```
 
