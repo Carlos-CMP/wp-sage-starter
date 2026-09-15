@@ -1,61 +1,70 @@
 # WordPress Sage Starter
 
-Starter de WordPress reutilizable para sitios de marketing, construido con Bedrock, Sage, Tailwind CSS, Gutenberg y ACF Free.
-
-Este starter es una plantilla de origen. Los proyectos generados evolucionan de forma independiente.
+Starter de WordPress basado en Bedrock, Sage, Tailwind CSS, Gutenberg y ACF Free.
 
 ## Requisitos
 
 - PHP >= 8.3
 - Composer >= 2.x
-- Node.js
-- WP-CLI disponible en el PATH
+- Node.js >= 20.19.0
+- WP-CLI disponible en el `PATH`
 - Git
 
-Los scripts resuelven estas herramientas desde el PATH. Si alguna no está en el PATH, o necesitas fijar una instalación concreta, define la variable de entorno correspondiente con su ruta ejecutable en vez de editar ningún script: `STARTER_PHP`, `STARTER_COMPOSER`, `STARTER_WP_CLI`, `STARTER_GIT`, `STARTER_NODE`, `STARTER_NPM`.
+Los scripts resuelven estas herramientas desde el `PATH`. Si necesitas fijar una instalación concreta, define la variable de entorno correspondiente:
+
+- `STARTER_PHP`
+- `STARTER_COMPOSER`
+- `STARTER_WP_CLI`
+- `STARTER_GIT`
+- `STARTER_NODE`
+- `STARTER_NPM`
 
 ## Instalación
 
-1. Crea tu propia copia de este repo bajo tu cuenta, y luego entra en ella con `cd`:
+1. Crea un repositorio desde la plantilla.
 
-   - **Web**: en [la página de GitHub de este repo](https://github.com/Carlos-CMP/wp-sage-starter), pulsa **Use this template**, y luego clona *tu nuevo repo* (no este):
+   Desde GitHub, abre el repositorio plantilla y pulsa **Use this template**.
 
-     ![Botón "Use this template" en la página de GitHub del repo](docs/images/paso1.png)
+   ![Botón "Use this template" en GitHub](docs/images/paso1.png)
 
-     ```powershell
-     git clone https://github.com/<tu-cuenta>/<tu-nuevo-repo>.git
-     cd <tu-nuevo-repo>
-     ```
-   - **GitHub CLI** (requiere [`gh`](https://cli.github.com/), aparte de Git): hace ambos pasos a la vez —
-
-     ```powershell
-     gh repo create <tu-cuenta>/<tu-nuevo-repo> --template Carlos-CMP/wp-sage-starter --clone
-     cd <tu-nuevo-repo>
-     ```
-2. Comprueba los requisitos:
+2. Una vez clonado, ejecuta el script de requisitos para la instalación.
 
    ```powershell
    .\scripts\doctor.ps1
    ```
-3. Apunta LocalWP a este repo (requiere tener ya un sitio de LocalWP creado con WordPress instalado — `<nombre-de-tu-sitio-local>` es como lo hayas llamado en Local):
+
+   Cualquier `ERROR` requiere solucionarlo antes de continuar con la instalación.
+
+3. Crea o abre un sitio en LocalWP con WordPress instalado.
+
+4. Apunta LocalWP a este repositorio.
 
    ```powershell
    .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\<nombre-de-tu-sitio-local>"
    ```
-4. Instala y configura el proyecto (los tres valores son de ejemplo, no los copies tal cual — `-DbHost` en concreto es el puerto de MySQL de *tu* sitio, distinto en cada sitio de Local: pestaña **Database** del sitio en Local, o `dbHost` en la salida de `doctor.ps1 -Json`):
+
+5. Instala y configura el proyecto.
+
+   Usa el dominio del sitio:
+
+   ![Dominio del sitio en LocalWP](docs/images/site-domain.png)
+
+   Usa el puerto de la base de datos:
+
+   ![Puerto de la base de datos en LocalWP](docs/images/port.png)
 
    ```powershell
    .\scripts\new-project.ps1 -ProjectName "<nombre-de-tu-proyecto>" -Domain "<tu-dominio-local>" -DbHost "127.0.0.1:<puerto-mysql-de-tu-sitio>"
    ```
-   Usa `-Domain "localhost:<puerto>"` si el sitio está en modo de enrutado "localhost" de LocalWP. Claves de `.env`: consulta `.env.example`.
-5. Comprobación final:
+
+6. Valida la instalación.
 
    ```powershell
    .\scripts\validate.ps1
    ```
 
-Otros comandos: `.\scripts\wp.ps1 --info` (WP-CLI), `.\scripts\seed-demo-content.ps1` (resembrar la home de demo).
-
 ## Arquitectura
+
+Consulta el diagrama técnico:
 
 https://carlos-cmp.github.io/wp-sage-starter/runtime-architecture/runtime-architecture.html
