@@ -10,15 +10,6 @@ Starter de WordPress basado en Bedrock, Sage, Tailwind CSS, Gutenberg y ACF Free
 - WP-CLI disponible en el `PATH`
 - Git
 
-Los scripts resuelven estas herramientas desde el `PATH`. Si necesitas fijar una instalación concreta, define la variable de entorno correspondiente:
-
-- `STARTER_PHP`
-- `STARTER_COMPOSER`
-- `STARTER_WP_CLI`
-- `STARTER_GIT`
-- `STARTER_NODE`
-- `STARTER_NPM`
-
 ## Instalación
 
 1. Crea un repositorio desde la plantilla.
