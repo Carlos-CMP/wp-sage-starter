@@ -16,23 +16,24 @@ The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a 
 
 ## Setup
 
-1. GitHub → **Use this template** on this repo to create your own, then clone *that* one:
+1. On GitHub, click **Use this template** on this repo to create your own copy under your account.
+2. Clone *your new repo* (not this one):
 
    ```powershell
    git clone https://github.com/<your-account>/<your-new-repo>.git
    cd <your-new-repo>
    ```
-2. ```powershell
+3. ```powershell
    .\scripts\doctor.ps1
    ```
-3. ```powershell
+4. ```powershell
    .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\starter-sage-wp"
    ```
-4. ```powershell
+5. ```powershell
    .\scripts\new-project.ps1 -ProjectName "My Project" -Domain "my-project.local" -DbHost "127.0.0.1:10023"
    ```
    Use `-Domain "localhost:<port>"` in LocalWP's localhost Routing Mode. `.env` keys: see `.env.example`.
-5. ```powershell
+6. ```powershell
    .\scripts\validate.ps1
    ```
 
