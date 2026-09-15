@@ -20,6 +20,7 @@ The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a 
 
    ```powershell
    git clone https://github.com/<your-account>/<your-new-repo>.git
+   cd <your-new-repo>
    ```
 2. ```powershell
    .\scripts\doctor.ps1
