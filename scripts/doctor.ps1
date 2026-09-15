@@ -105,7 +105,7 @@ function Read-EnvKeys {
 
 foreach ($tool in @('PHP', 'Composer', 'WPCLI', 'WPWrapper', 'Git', 'Node', 'Npm')) {
     if ($paths[$tool]) {
-        Add-Result 'OK' $tool "$tool found at $($paths[$tool])"
+        Add-Result 'OK' $tool "at $($paths[$tool])"
     } else {
         $hint = if ($envVars.ContainsKey($tool)) { " Install it and ensure it's on PATH, or set `$env:$($envVars[$tool]) to its executable path." } else { '' }
         $howToInstall = if ($wingetIds.ContainsKey($tool)) {
@@ -190,7 +190,7 @@ if ($paths.WPCLI) {
 }
 
 if (Test-Path -LiteralPath $envFile) {
-    Add-Result 'OK' '.env' ".env found at $envFile"
+    Add-Result 'OK' '.env' "at $envFile"
     $envKeys = Read-EnvKeys $envFile
     $requiredEnv = @('DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST', 'WP_ENV', 'WP_HOME', 'WP_SITEURL', 'AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY', 'AUTH_SALT', 'SECURE_AUTH_SALT', 'LOGGED_IN_SALT', 'NONCE_SALT')
     $missingEnv = $requiredEnv | Where-Object { -not $envKeys.ContainsKey($_) }
