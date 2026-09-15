@@ -17,6 +17,8 @@ The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a 
 ## Setup
 
 1. On [this repo's GitHub page](https://github.com/Carlos-CMP/wp-sage-starter), click **Use this template** to create your own copy under your account.
+
+   ![Use this template button on the repo's GitHub page](docs/images/paso1.png)
 2. Clone *your new repo* (not this one):
 
    ```powershell
