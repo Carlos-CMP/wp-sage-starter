@@ -100,7 +100,14 @@ foreach ($tool in @('PHP', 'Composer', 'WPCLI', 'WPWrapper', 'Git', 'Node', 'Npm
 if ($paths.PHP) {
     $phpVersion = Invoke-Capture { & $paths.PHP -r 'echo PHP_VERSION;' }
     if ($phpVersion.ExitCode -eq 0) {
-        Add-Result 'OK' 'PHP version' "PHP $($phpVersion.Output) (composer install enforces the '>=8.3' requirement in composer.json)"
+        $requiredPhp = (Get-Content -Raw (Join-Path $root 'composer.json') | ConvertFrom-Json).require.php
+        $belowRequirement = $requiredPhp -match '^>=\s*([\d.]+)$' -and [version] $phpVersion.Output -lt [version] $Matches[1]
+
+        if ($belowRequirement) {
+            Add-Result 'WARN' 'PHP version' "PHP $($phpVersion.Output) does not satisfy composer.json's '$requiredPhp' requirement; composer install will fail. If this came from LocalWP, switch the site's PHP version in Local, or point `$env:STARTER_PHP at a matching PHP."
+        } else {
+            Add-Result 'OK' 'PHP version' "PHP $($phpVersion.Output) (composer install enforces the '$requiredPhp' requirement in composer.json)"
+        }
     } else {
         Add-Result 'ERROR' 'PHP version' 'Failed to read PHP version' $phpVersion.Output
     }
