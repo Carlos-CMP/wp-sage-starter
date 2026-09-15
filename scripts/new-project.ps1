@@ -11,13 +11,13 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$root = $PSScriptRoot
+$root = Split-Path $PSScriptRoot -Parent
 $theme = Join-Path $root 'web\app\themes\starter-theme'
 $envFile = Join-Path $root '.env'
-$wp = Join-Path $root 'scripts\wp.ps1'
-$seed = Join-Path $root 'scripts\seed-demo-content.ps1'
+$wp = Join-Path $PSScriptRoot 'wp.ps1'
+$seed = Join-Path $PSScriptRoot 'seed-demo-content.ps1'
 
-. (Join-Path $root 'scripts\_tools.ps1')
+. (Join-Path $PSScriptRoot '_tools.ps1')
 
 $php = Get-PhpPath
 $composer = Get-ComposerPath
