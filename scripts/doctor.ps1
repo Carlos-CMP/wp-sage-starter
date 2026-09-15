@@ -28,6 +28,13 @@ $installUrls = @{
     Node = 'https://nodejs.org/'
 }
 
+# Only tools with an official winget package; Composer and WP-CLI have none.
+$wingetIds = @{
+    PHP = 'PHP.PHP.8.3'
+    Git = 'Git.Git'
+    Node = 'OpenJS.NodeJS'
+}
+
 $paths = @{
     PHP = Get-PhpPath
     Composer = Get-ComposerPath
@@ -101,8 +108,12 @@ foreach ($tool in @('PHP', 'Composer', 'WPCLI', 'WPWrapper', 'Git', 'Node', 'Npm
         Add-Result 'OK' $tool "$tool found at $($paths[$tool])"
     } else {
         $hint = if ($envVars.ContainsKey($tool)) { " Install it and ensure it's on PATH, or set `$env:$($envVars[$tool]) to its executable path." } else { '' }
-        $download = if ($installUrls.ContainsKey($tool)) { " Download: $($installUrls[$tool])" } else { '' }
-        Add-Result 'ERROR' $tool "$tool not found on PATH.$hint$download"
+        $howToInstall = if ($wingetIds.ContainsKey($tool)) {
+            " winget install $($wingetIds[$tool]), or download from $($installUrls[$tool])"
+        } elseif ($installUrls.ContainsKey($tool)) {
+            " Download: $($installUrls[$tool])"
+        } else { '' }
+        Add-Result 'ERROR' $tool "$tool not found on PATH.$hint$howToInstall"
     }
 }
 
