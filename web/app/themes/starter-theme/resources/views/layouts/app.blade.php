@@ -14,14 +14,14 @@
     @php(wp_body_open())
     @php(do_action('starter_body_open'))
 
-    <div id="app">
+    <div id="app" class="flex min-h-screen flex-col">
       <a class="sr-only focus:not-sr-only" href="#main">
         {{ __('Skip to content', 'starter-theme') }}
       </a>
 
       @include('sections.header')
 
-      <main id="main" class="main">
+      <main id="main" class="main flex flex-1 flex-col">
         @yield('content')
       </main>
 

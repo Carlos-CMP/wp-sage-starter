@@ -3,7 +3,7 @@
   $innerClass = $alignment === 'center' ? 'text-center mx-auto' : '';
 @endphp
 
-<section class="{{ $sectionClass }} py-16 md:py-24">
+<section class="{{ $sectionClass }} flex flex-1 items-center py-16 md:py-24">
   <div class="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
     <div class="{{ $innerClass }}">
       @if ($eyebrow)

@@ -1,4 +1,4 @@
-<div class="wp-content">
+<div class="wp-content flex flex-1 flex-col">
   @php(the_content())
 </div>
 
