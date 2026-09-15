@@ -42,10 +42,10 @@ Los scripts resuelven estas herramientas desde el PATH. Si alguna no está en el
    ```powershell
    .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\<nombre-de-tu-sitio-local>"
    ```
-4. Instala y configura el proyecto:
+4. Instala y configura el proyecto (los tres valores son de ejemplo, no los copies tal cual — `-DbHost` en concreto es el puerto de MySQL de *tu* sitio, distinto en cada sitio de Local: pestaña **Database** del sitio en Local, o `dbHost` en la salida de `doctor.ps1 -Json`):
 
    ```powershell
-   .\scripts\new-project.ps1 -ProjectName "My Project" -Domain "my-project.local" -DbHost "127.0.0.1:10023"
+   .\scripts\new-project.ps1 -ProjectName "<nombre-de-tu-proyecto>" -Domain "<tu-dominio-local>" -DbHost "127.0.0.1:<puerto-mysql-de-tu-sitio>"
    ```
    Usa `-Domain "localhost:<puerto>"` si el sitio está en modo de enrutado "localhost" de LocalWP. Claves de `.env`: consulta `.env.example`.
 5. Comprobación final:
