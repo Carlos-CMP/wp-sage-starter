@@ -229,8 +229,15 @@ if (Test-Path -LiteralPath $envFile) {
 if ($Json) {
     $results | ConvertTo-Json -Depth 8
 } else {
+    $statusColor = @{
+        OK = 'Green'
+        WARN = 'Yellow'
+        ERROR = 'Red'
+    }
+
     foreach ($result in $results) {
-        '{0,-5} {1}: {2}' -f $result.status, $result.name, $result.message
+        Write-Host ('{0,-5} ' -f $result.status) -ForegroundColor $statusColor[$result.status] -NoNewline
+        Write-Host "$($result.name): $($result.message)"
     }
 }
 
