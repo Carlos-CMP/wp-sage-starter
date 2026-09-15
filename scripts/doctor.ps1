@@ -183,10 +183,10 @@ if (Test-Path -LiteralPath $envFile) {
     Add-Result 'WARN' '.env' '.env is missing; bootstrap can create it when DbHost is provided'
 }
 
-if (Test-Path -LiteralPath $paths.LocalWP) {
+if ($paths.LocalWP) {
     Add-Result 'OK' 'LocalWP' "LocalWP found at $($paths.LocalWP)"
 } else {
-    Add-Result 'WARN' 'LocalWP' "LocalWP not found at $($paths.LocalWP)"
+    Add-Result 'WARN' 'LocalWP' "LocalWP not found at $($localWpCandidates -join ' or ')"
 }
 
 $sitesFile = Join-Path $env:APPDATA 'Local\sites.json'
