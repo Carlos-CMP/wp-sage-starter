@@ -131,6 +131,22 @@ if ($paths.PHP) {
     } else {
         Add-Result 'ERROR' 'PHP version' 'Failed to read PHP version' $phpVersion.Output
     }
+
+    $requiredExtensions = @('fileinfo', 'mysqli', 'curl', 'mbstring', 'openssl', 'zip', 'gd', 'intl')
+    $loadedModules = Invoke-Capture { & $paths.PHP -m }
+
+    if ($loadedModules.ExitCode -eq 0) {
+        $loaded = $loadedModules.Output -split "`r?`n" | ForEach-Object { $_.Trim() }
+        $missingExtensions = $requiredExtensions | Where-Object { $loaded -notcontains $_ }
+
+        if ($missingExtensions.Count -eq 0) {
+            Add-Result 'OK' 'PHP extensions' 'fileinfo, mysqli, curl, mbstring, openssl, zip, gd, intl are all enabled'
+        } else {
+            Add-Result 'WARN' 'PHP extensions' "Missing: $($missingExtensions -join ', '). A fresh Windows PHP install ships with these commented out in php.ini - uncomment 'extension=<name>' for each, then open a new terminal." $missingExtensions
+        }
+    } else {
+        Add-Result 'ERROR' 'PHP extensions' 'Failed to list PHP extensions' $loadedModules.Output
+    }
 }
 
 if ($paths.Composer) {
