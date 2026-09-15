@@ -16,32 +16,39 @@ The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a 
 
 ## Setup
 
-1. On [this repo's GitHub page](https://github.com/Carlos-CMP/wp-sage-starter), click **Use this template** to create your own copy under your account.
+1. Create your own copy of this repo under your account, then `cd` into it:
 
-   ![Use this template button on the repo's GitHub page](docs/images/paso1.png)
-2. Clone *your new repo* (not this one):
+   - **Web**: on [this repo's GitHub page](https://github.com/Carlos-CMP/wp-sage-starter), click **Use this template**, then clone *your new repo* (not this one):
 
-   ```powershell
-   git clone https://github.com/<your-account>/<your-new-repo>.git
-   cd <your-new-repo>
-   ```
-3. Check requirements:
+     ![Use this template button on the repo's GitHub page](docs/images/paso1.png)
+
+     ```powershell
+     git clone https://github.com/<your-account>/<your-new-repo>.git
+     cd <your-new-repo>
+     ```
+   - **GitHub CLI** (requires [`gh`](https://cli.github.com/), separate from Git): does both steps at once —
+
+     ```powershell
+     gh repo create <your-account>/<your-new-repo> --template Carlos-CMP/wp-sage-starter --clone
+     cd <your-new-repo>
+     ```
+2. Check requirements:
 
    ```powershell
    .\scripts\doctor.ps1
    ```
-4. Point LocalWP at this repo (requires a LocalWP site already created with WordPress installed):
+3. Point LocalWP at this repo (requires a LocalWP site already created with WordPress installed):
 
    ```powershell
    .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\starter-sage-wp"
    ```
-5. Install and configure the project:
+4. Install and configure the project:
 
    ```powershell
    .\scripts\new-project.ps1 -ProjectName "My Project" -Domain "my-project.local" -DbHost "127.0.0.1:10023"
    ```
    Use `-Domain "localhost:<port>"` in LocalWP's localhost Routing Mode. `.env` keys: see `.env.example`.
-6. Final check:
+5. Final check:
 
    ```powershell
    .\scripts\validate.ps1
