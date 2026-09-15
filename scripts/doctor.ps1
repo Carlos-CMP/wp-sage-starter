@@ -20,6 +20,14 @@ $envVars = @{
     Npm = 'STARTER_NPM'
 }
 
+$installUrls = @{
+    PHP = 'https://windows.php.net/download/'
+    Composer = 'https://getcomposer.org/download/'
+    WPCLI = 'https://wp-cli.org/#installing'
+    Git = 'https://git-scm.com/download/win'
+    Node = 'https://nodejs.org/'
+}
+
 $paths = @{
     PHP = Get-PhpPath
     Composer = Get-ComposerPath
@@ -93,7 +101,8 @@ foreach ($tool in @('PHP', 'Composer', 'WPCLI', 'WPWrapper', 'Git', 'Node', 'Npm
         Add-Result 'OK' $tool "$tool found at $($paths[$tool])"
     } else {
         $hint = if ($envVars.ContainsKey($tool)) { " Install it and ensure it's on PATH, or set `$env:$($envVars[$tool]) to its executable path." } else { '' }
-        Add-Result 'ERROR' $tool "$tool not found on PATH.$hint"
+        $download = if ($installUrls.ContainsKey($tool)) { " Download: $($installUrls[$tool])" } else { '' }
+        Add-Result 'ERROR' $tool "$tool not found on PATH.$hint$download"
     }
 }
 
