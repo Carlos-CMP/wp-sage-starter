@@ -1,61 +1,61 @@
 # WordPress Sage Starter
 
-Reusable WordPress starter for marketing websites, built with Bedrock, Sage, Tailwind CSS, Gutenberg, and ACF Free.
+Starter de WordPress reutilizable para sitios de marketing, construido con Bedrock, Sage, Tailwind CSS, Gutenberg y ACF Free.
 
-This starter is a template of origin. Generated projects evolve independently.
+Este starter es una plantilla de origen. Los proyectos generados evolucionan de forma independiente.
 
-## Requirements
+## Requisitos
 
 - PHP >= 8.3
 - Composer >= 2.x
 - Node.js
-- WP-CLI available on PATH
+- WP-CLI disponible en el PATH
 - Git
 
-The scripts resolve these from PATH. If one isn't on PATH, or you need to pin a specific installation, set the matching environment variable to its executable path instead of editing any script: `STARTER_PHP`, `STARTER_COMPOSER`, `STARTER_WP_CLI`, `STARTER_GIT`, `STARTER_NODE`, `STARTER_NPM`.
+Los scripts resuelven estas herramientas desde el PATH. Si alguna no está en el PATH, o necesitas fijar una instalación concreta, define la variable de entorno correspondiente con su ruta ejecutable en vez de editar ningún script: `STARTER_PHP`, `STARTER_COMPOSER`, `STARTER_WP_CLI`, `STARTER_GIT`, `STARTER_NODE`, `STARTER_NPM`.
 
-## Setup
+## Instalación
 
-1. Create your own copy of this repo under your account, then `cd` into it:
+1. Crea tu propia copia de este repo bajo tu cuenta, y luego entra en ella con `cd`:
 
-   - **Web**: on [this repo's GitHub page](https://github.com/Carlos-CMP/wp-sage-starter), click **Use this template**, then clone *your new repo* (not this one):
+   - **Web**: en [la página de GitHub de este repo](https://github.com/Carlos-CMP/wp-sage-starter), pulsa **Use this template**, y luego clona *tu nuevo repo* (no este):
 
-     ![Use this template button on the repo's GitHub page](docs/images/paso1.png)
-
-     ```powershell
-     git clone https://github.com/<your-account>/<your-new-repo>.git
-     cd <your-new-repo>
-     ```
-   - **GitHub CLI** (requires [`gh`](https://cli.github.com/), separate from Git): does both steps at once —
+     ![Botón "Use this template" en la página de GitHub del repo](docs/images/paso1.png)
 
      ```powershell
-     gh repo create <your-account>/<your-new-repo> --template Carlos-CMP/wp-sage-starter --clone
-     cd <your-new-repo>
+     git clone https://github.com/<tu-cuenta>/<tu-nuevo-repo>.git
+     cd <tu-nuevo-repo>
      ```
-2. Check requirements:
+   - **GitHub CLI** (requiere [`gh`](https://cli.github.com/), aparte de Git): hace ambos pasos a la vez —
+
+     ```powershell
+     gh repo create <tu-cuenta>/<tu-nuevo-repo> --template Carlos-CMP/wp-sage-starter --clone
+     cd <tu-nuevo-repo>
+     ```
+2. Comprueba los requisitos:
 
    ```powershell
    .\scripts\doctor.ps1
    ```
-3. Point LocalWP at this repo (requires a LocalWP site already created with WordPress installed — `<your-local-site-name>` is whatever you named it in Local):
+3. Apunta LocalWP a este repo (requiere tener ya un sitio de LocalWP creado con WordPress instalado — `<nombre-de-tu-sitio-local>` es como lo hayas llamado en Local):
 
    ```powershell
-   .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\<your-local-site-name>"
+   .\scripts\link-localwp.ps1 -LocalSitePath "$env:USERPROFILE\Local Sites\<nombre-de-tu-sitio-local>"
    ```
-4. Install and configure the project:
+4. Instala y configura el proyecto:
 
    ```powershell
    .\scripts\new-project.ps1 -ProjectName "My Project" -Domain "my-project.local" -DbHost "127.0.0.1:10023"
    ```
-   Use `-Domain "localhost:<port>"` in LocalWP's localhost Routing Mode. `.env` keys: see `.env.example`.
-5. Final check:
+   Usa `-Domain "localhost:<puerto>"` si el sitio está en modo de enrutado "localhost" de LocalWP. Claves de `.env`: consulta `.env.example`.
+5. Comprobación final:
 
    ```powershell
    .\scripts\validate.ps1
    ```
 
-Other commands: `.\scripts\wp.ps1 --info` (WP-CLI), `.\scripts\seed-demo-content.ps1` (re-seed demo homepage).
+Otros comandos: `.\scripts\wp.ps1 --info` (WP-CLI), `.\scripts\seed-demo-content.ps1` (resembrar la home de demo).
 
-## Architecture
+## Arquitectura
 
 https://carlos-cmp.github.io/wp-sage-starter/runtime-architecture/runtime-architecture.html
